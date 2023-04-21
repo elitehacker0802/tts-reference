@@ -12,4 +12,5 @@ audios/
 *.json
 .tmp/
 .vscode/
-Models/
+*.pt
+*.ckpt
