@@ -20,7 +20,7 @@ class Meta_FastSpeech2(torch.nn.Module):
         language = "en"
         self.device = device
         self.text2phone = ArticulatoryCombinedTextFrontend(language=language, add_silence_to_end=True)
-        checkpoint = torch.load(os.path.join("Models", f"FastSpeech2_{model_name}", "best.pt"), map_location='cpu')
+        checkpoint = torch.load("Models/FastSpeech2_Meta/best.pt", map_location='cpu')
         self.phone2mel = FastSpeech2(weights=checkpoint["model"]).to(torch.device(device))
         self.mel2wav = HiFiGANGenerator(path_to_weights=os.path.join("Models", "HiFiGAN_combined", "best.pt")).to(torch.device(device))
         self.default_utterance_embedding = checkpoint["default_emb"].to(self.device)
