@@ -1,7 +1,7 @@
 import os
 import urllib.request
 
-from Utility.storage_config import MODELS_DIR
+MODELS_DIR = "Models/"
 
 
 def report(block_number, read_size, total_size):
