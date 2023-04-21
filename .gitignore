@@ -1,0 +1,15 @@
+.idea
+*.pyc
+*.png
+*.pdf
+tensorboard_logs
+Corpora
+*_graph
+*.out
+*.wav
+audios/
+*playground*
+*.json
+.tmp/
+.vscode/
+Models/
