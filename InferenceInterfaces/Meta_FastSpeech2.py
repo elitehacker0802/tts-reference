@@ -4,6 +4,10 @@ import librosa.display as lbd
 import matplotlib.pyplot as plt
 import soundfile
 import torch
+import pickle
+from functools import partial
+pickle.load = partial(pickle.load, encoding="latin1")
+pickle.Unpickler = partial(pickle.Unpickler, encoding="latin1")
 
 from InferenceInterfaces.InferenceArchitectures.InferenceFastSpeech2 import FastSpeech2
 from InferenceInterfaces.InferenceArchitectures.InferenceHiFiGAN import HiFiGANGenerator
@@ -20,7 +24,7 @@ class Meta_FastSpeech2(torch.nn.Module):
         language = "en"
         self.device = device
         self.text2phone = ArticulatoryCombinedTextFrontend(language=language, add_silence_to_end=True)
-        checkpoint = torch.load("Models/FastSpeech2_Meta/best.pt", map_location='cpu')
+        checkpoint = torch.load("Models/FastSpeech2_Meta/best.pt", map_location='cpu', pickle_module=pickle)
         self.phone2mel = FastSpeech2(weights=checkpoint["model"]).to(torch.device(device))
         self.mel2wav = HiFiGANGenerator(path_to_weights=os.path.join("Models", "HiFiGAN_combined", "best.pt")).to(torch.device(device))
         self.default_utterance_embedding = checkpoint["default_emb"].to(self.device)
