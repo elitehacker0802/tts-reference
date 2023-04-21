@@ -197,4 +197,4 @@ iface = gr.Interface(
     allow_screenshot=False,
     article=article,
 )
-iface.launch(enable_queue=True)
+iface.launch(server_name="0.0.0.0", enable_queue=True)
